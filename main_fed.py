@@ -16,7 +16,6 @@ from utils.get_dataset import get_dataset
 from utils.utils import *
 from utils.set_seed import set_random_seed
 from Algorithm import *
-from Algorithm import FedTrace
 
 
 def FedAvg(net_glob, dataset_train, dataset_test, dict_users):
@@ -628,22 +627,6 @@ if __name__ == '__main__':    # parse args
         SAFA(args, net_glob, dataset_train, dataset_test, dict_users)
     elif args.algorithm == 'FedSA':
         FedSA(args, net_glob, dataset_train, dataset_test, dict_users)
-    elif args.algorithm == 'FedTrace':
-        # args.cifar100_coarse = 0
-        # args.num_classes = 100
-        # dataset_train_1, _, _ = get_dataset(args)
-        # args.cifar100_coarse = 1
-        # args.num_classes = 20
-        # dict_users = allocateImage(dataset_train_1, dataset_train, dict_users)
-        fed_trace = FedTrace.FedTrace(args, net_glob, dataset_train, dataset_test, dict_users, None)
-        if args.simulate == 1:
-            fed_trace.simulate()
-        elif args.label_type == 0:
-            fed_trace.train()
-        elif args.label_type == 1:
-            fed_trace.train_softLabel()
-        elif args.label_type == 2:
-            fed_trace.train_activation()
     elif args.algorithm == "WKAFL":
         wkafl = WKAFL(args, net_glob, dataset_train, dataset_test, dict_users)
         wkafl.train()
