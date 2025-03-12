@@ -389,16 +389,6 @@ class FedTrace:
                 data_size[model_index] += sum(self.true_labels[idx])
                 data_size_var = np.var(unitization(data_size))
                 r2 = -data_size_var
-
-            # version_mean = np.mean(self.model_version_list)
-            # version_diff = self.model_version_list[model_index] - version_mean
-            # time_mean = np.mean(self.train_time_list)
-            # time_diff = self.train_time_list[idx] - time_mean
-            # r3 = version_diff * time_diff / (max(self.train_time_list) * max(self.model_version_list) + 1)
-
-            # R.append([idx, max([0, cos_sim + r3])])
-            # R.append([idx, post_cos_sim + r3])
-            # TODO 根据feature更新的次数动态的调整r1的权重
             R.append([idx, 1 * r1 + r2])
         R.sort(key=lambda x: x[1], reverse=True)
         return R[0][0]
